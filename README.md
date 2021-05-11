@@ -1,24 +1,18 @@
-# desafio
+# Desafio Front end Huggy - Wagner Bittencourt
 
-## Project setup
+## Após baixar o projeto, instale as dependências com o comando abaixo 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Configuração
+```
+Para que este projeto funcione, deve ser criado um arquivo chamado "config.json", dentro da pasta /src/assets e neste arquivo deve conter o valor para access_token (a chave de acesso da API).
+```
+
+### Para compilar e executar em de desenvolvimento (com hot-reloads):
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
