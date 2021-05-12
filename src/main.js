@@ -2,7 +2,8 @@ import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import Dashboard from './components/dashboard/Dashboard'
+import Dashboard from './components/dashboard/Dashboard.vue'
+import Login from './components/Login.vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -18,6 +19,10 @@ const router = new VueRouter({
     {
       path: '/Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/',
+      component: Login,
     }
   ]
 })
@@ -25,5 +30,5 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  render: h => h(App),  
+  render: h => h(App),
 }).$mount('#app')

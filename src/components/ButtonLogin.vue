@@ -5,16 +5,14 @@
 </template>
 
 <script>
-
-
 export default {
-    name: 'ButtonLogin',
-    methods: {
-      login(){
-        this.$router.push('Dashboard')
-      },
+  name: "ButtonLogin",
+  methods: {
+    login() {
+      this.$router.push("Dashboard");
     },
-}
+  },
+};
 </script>
 
 <style scoped>

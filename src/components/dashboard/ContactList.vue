@@ -1,21 +1,18 @@
 <template>
-    <div>
-        <AddContact/>
-    </div>
 </template>
 
 <script>
-import AddContact from './AddContact'
+// import AddContact from "./AddContact";
 
 export default {
-    name: 'ContactList',
-    created: function(){
-        //Carregar a lista de contatos aqui!
-    },
-    components: {
-        AddContact,
-    },
-}
+  name: "ContactList",
+  created: function () {
+    //Carregar a lista de contatos aqui!
+  },
+  // components: {
+  //   AddContact,
+  // },
+};
 </script>
 
 <style scoped>
