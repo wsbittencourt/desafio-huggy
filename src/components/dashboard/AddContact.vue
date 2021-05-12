@@ -1,5 +1,5 @@
 <template>
-  <b-button id="btn" size="sm">
+  <b-button id="btn">
     <b-icon icon="plus" aria-hidden="true"></b-icon> Adicionar contato
   </b-button>
 </template>
