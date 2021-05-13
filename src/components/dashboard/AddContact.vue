@@ -19,4 +19,8 @@ export default {
   font-size: 14px;
   border-radius: 8px;
 }
+#btn:focus, #btn:active{
+  /* Remove o sombreamento */
+  box-shadow: none;
+}
 </style>

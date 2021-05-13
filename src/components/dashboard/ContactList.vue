@@ -4,7 +4,7 @@
     hover
     borderless
     show-empty
-    :items="items"
+    :items="contacts"
     :fields="fields"
     id="table"
   >
@@ -35,24 +35,38 @@ import AddContact from "./AddContact";
 
 export default {
   name: "ContactList",
-  created: function () {
-    //Carregar a lista de contatos aqui!
-  },
   data() {
     const fields = [
-      { key: "nome", thStyle: "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important" },
-      { key: "email", thStyle: "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important" },
-      { key: "telefone", thStyle: "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important" },
+      {
+        key: "nome",
+        thStyle:
+          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
+      },
+      {
+        key: "email",
+        thStyle:
+          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
+      },
+      {
+        key: "telefone",
+        thStyle:
+          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
+      },
     ];
-    const items = []; /*[{'name': 'Wagner','telefone':'3214-3421','email':'teste@teste.com'},
-                     {'name': 'David','telefone':'3200-3421','email':'teste2@teste.com'}] */
     return {
       fields,
-      items,
     };
   },
   components: {
     AddContact,
+  },
+  computed: {
+    contacts() {
+      return this.$store.state.contacts;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("getContacts");
   },
 };
 </script>

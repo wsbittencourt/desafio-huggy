@@ -4,6 +4,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import Dashboard from './components/dashboard/Dashboard.vue'
 import Login from './components/Login.vue'
+import store from './store'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -29,6 +30,7 @@ const router = new VueRouter({
 
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')

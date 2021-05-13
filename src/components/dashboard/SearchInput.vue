@@ -3,6 +3,7 @@
     id="search"
     type="search"
     placeholder="Buscar contato"
+    icon="search"
   ></b-form-input>
 </template>
 
@@ -33,5 +34,10 @@ export default {};
   order: 0;
   flex-grow: 0;
   margin: 0px 10px;
+}
+
+#search:focus, #search:active{
+  /* Remove o sombreamento */
+  box-shadow: none;
 }
 </style>

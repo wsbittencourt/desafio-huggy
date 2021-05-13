@@ -7,7 +7,7 @@ npm install
 
 ## Configuração
 
-Para que este projeto funcione, deve ser criado um arquivo chamado "config.json", dentro da pasta /src/assets e neste arquivo deve conter o valor para access_token (a chave de acesso da API).
+Para que este projeto funcione, deve ser criado um arquivo chamado "config.json", dentro da pasta /src/store/ e neste arquivo deve conter o valor para access_token (a chave de acesso da API).
 
 ### Para compilar e executar em de desenvolvimento (com hot-reloads):
 ```
