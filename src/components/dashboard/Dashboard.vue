@@ -1,5 +1,5 @@
 <template>
-  <b-container class="vh-100" id="container">
+  <b-container class="vh-100">
     <b-col md="10" sm="8" offset-md="1">
       <h2>Contatos</h2>
       <b-card id="box">
@@ -78,7 +78,7 @@ h2 {
 
 @media (max-width: 767px) {
   #box {
-    height: 400px;
+    height: 80vh;
   }
   #header {
     display: flex;

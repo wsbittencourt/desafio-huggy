@@ -5,22 +5,20 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  
-}
+  name: "App",
+};
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 #app {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #262626;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
 
 </style>

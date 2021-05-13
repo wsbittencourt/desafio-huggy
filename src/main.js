@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Dashboard from './components/dashboard/Dashboard.vue'
