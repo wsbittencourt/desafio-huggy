@@ -1,65 +1,37 @@
 <template>
-  <b-table
-    small
-    hover
-    borderless
-    show-empty
-    :items="contacts"
-    :fields="fields"
-    id="table"
-  >
-    <b-table-column field="nome" label="Nome" v-slot="props">
-      {{ props.row.name }}
-    </b-table-column>
+  <div>
+    <b-row id="contacts-head" align-h="between">
+      <b-col id="name"><strong> Nome <b-icon icon="arrow-down"></b-icon></strong></b-col>
+      <b-col><strong> Email </strong></b-col>
+      <b-col><strong> Telefone </strong></b-col>
+    </b-row>
 
-    <b-table-column field="email" label="Email" v-slot="props">
-      {{ props.row.email }}
-    </b-table-column>
-
-    <b-table-column field="telefone" label="Telefone" v-slot="props">
-      {{ props.row.phone }}
-    </b-table-column>
-
-    <template #empty>
-      <div id="hide">
-        <div><img src="../../assets/book.png" /></div>
-        <p>Ainda não há contatos</p>
-        <AddContact />
-      </div>
-    </template>
-  </b-table>
+    <!-- Relação de contatos -->
+    <section>
+      <b-row v-for="contact in contacts" :key="contact.id" class="contacts-row">
+        <b-col id="name"> <img v-bind:src="contact.photo" width="32" height="32" class="avatar"/> {{ contact.name }}</b-col>
+        <b-col> {{ contact.email }} </b-col>
+        <b-col align-h="between" class="menu">
+          <span>{{ contact.phone }}</span>
+          <span class="edit-delete">
+            <b-icon icon="pencil-fill"></b-icon>
+            <b-icon icon="trash-fill" id="btn-trash"></b-icon>
+          </span>
+        </b-col>
+      </b-row>
+    </section>
+  </div>
 </template>
 
 <script>
-import AddContact from "./AddContact";
+// import AddContact from "./AddContact";
 
 export default {
   name: "ContactList",
-  data() {
-    const fields = [
-      {
-        key: "nome",
-        thStyle:
-          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
-      },
-      {
-        key: "email",
-        thStyle:
-          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
-      },
-      {
-        key: "telefone",
-        thStyle:
-          "border-bottom: 1px solid #E1E1E1;padding-left: 24px !important",
-      },
-    ];
-    return {
-      fields,
-    };
-  },
-  components: {
-    AddContact,
-  },
+  // data() {},
+  // components: {
+  //   AddContact,
+  // },
   computed: {
     contacts() {
       return this.$store.state.contacts;
@@ -67,42 +39,61 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getContacts");
+    console.log(this.$store.state.contacts[1]);
   },
 };
 </script>
 
 <style scoped>
-p {
-  font-size: 16px;
-  line-height: 24px;
-
-  margin-top: 16px;
-  margin-bottom: 24px;
-
-  color: #757575;
-}
-#hide {
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.15px;
-  border: none;
-}
-
-#table {
-  position: absolute;
+#contacts-head {
+  border-bottom: 1px solid #e1e1e1;
+  padding-bottom: 13px;
+  margin-bottom: 3px;
   left: 0%;
   right: 0%;
+  top: 100%;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  text-align: left;
+  letter-spacing: 0.4px;
+
+  color: #505050;
+}
+
+.contacts-row {
+  border-radius: 8px;
+  margin: 0px 8px 8px 0px;
+  padding: 12px 16px 12px 5px;
+  height: 56px;
+
+  font-size: 14px;
+  color: #262626;
+}
+
+.contacts-row:hover {
+  background: #f8f8f8;
+}
+
+.edit-delete{
+  color: #505050;
+  float: right;
+}
+
+#btn-trash{
+  margin-left:23px
+}
+
+.avatar{
+  border-radius: 50%;
+  margin-right: 20px;
 }
 
 @media (min-width: 768px) {
-  #hide {
-    padding-top: 100px;
-  }
-}
-
-@media (max-width: 767px) {
-  #hide {
-    padding-top: 15px;
+  #contacts-head #name {
+    padding-left: 24px;
   }
 }
 </style>

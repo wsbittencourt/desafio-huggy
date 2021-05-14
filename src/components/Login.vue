@@ -21,11 +21,6 @@ export default {
 </script>
 
 <style scoped>
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-    body{
-        font-family: 'Roboto', sans-serif;
-    }  */
 #login-container {
   background-color: #f8f8f8;
   text-align: center;
