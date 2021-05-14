@@ -10,7 +10,7 @@
     <section>
       <b-row v-for="contact in contacts" :key="contact.id" class="contacts-row" v-b-modal="contact.id">
         <b-col id="name"> 
-            <img v-bind:src="contact.photo" width="32" height="32" class="avatar"/> {{ contact.name }}
+            <Avatar :url="contact.photo"/> {{ contact.name }}
         </b-col>
 
         <b-col> {{ contact.email }} </b-col>
@@ -24,10 +24,37 @@
           </span>
         </b-col>
 
-        <b-modal :id="contact.id" :title="contact.name">
-            <p class="my-4">Contato {{contact.name}}</p>
+        <!-- Modal perfil de usuário -->
+        <b-modal :id="contact.id" size="lg" hide-foote>
+          <template #modal-title>
+            <b-row align-h="start">
+              <b-col><Avatar :url="contact.photo"/><h2>{{ contact.name }}</h2></b-col>
+            </b-row>                            
+          </template>
+          <b-row>
+            <b-col class="text-right">Email</b-col>
+            <b-col>{{contact.email}}</b-col>
+          </b-row>
+          <b-row>
+            <b-col class="text-right">Endereço</b-col>
+            <b-col>{{contact.address}}</b-col>
+          </b-row>
+          <b-row>
+            <b-col class="text-right">Bairro</b-col>
+            <b-col>{{contact.district}}</b-col>
+          </b-row>
+          <b-row>
+            <b-col class="text-right">Cidade</b-col>
+            <b-col>{{contact.city}}</b-col>
+          </b-row>
+          <b-row>
+            <b-col class="text-right">Estado</b-col>
+            <b-col>{{contact.state}}</b-col>
+          </b-row>
         </b-modal>
+        <!-- Fim modal perfil de usuário -->
       </b-row>
+      <!-- Fim relação de contatos -->
     </section>
 
     <!-- Exibe mensagem caso não existam contatos cadastrados -->
@@ -38,16 +65,20 @@
         <AddContact />
       </div>
     </section>
+    <!-- Fim de mensagem -->
+
   </div>
 </template>
 
 <script>
 import AddContact from "./AddContact";
+import Avatar from "./Avatar"
 
 export default {
   name: "ContactList",
   components: {
     AddContact,
+    Avatar
   },
   computed: {
     contacts() {
@@ -107,11 +138,6 @@ export default {
 
 #btn-trash{
   margin-left:23px
-}
-
-.avatar{
-  border-radius: 50%;
-  margin-right: 20px;
 }
 
 #hide {
