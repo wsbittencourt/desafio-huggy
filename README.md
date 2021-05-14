@@ -18,7 +18,7 @@ Para que este projeto funcione, deve ser criado um arquivo chamado "config.json"
 }.
 ~~~
 
-### Para compilar e executar em de desenvolvimento (com hot-reloads):
+### Para compilar e executar em ambiente de desenvolvimento (com hot-reloads):
 ```
 npm run serve
 ```
