@@ -24,35 +24,8 @@
           </span>
         </b-col>
 
-        <!-- Modal perfil de usuário -->
-        <b-modal :id="contact.id" size="lg" hide-foote>
-          <template #modal-title>
-            <b-row align-h="start">
-              <b-col><Avatar :url="contact.photo"/><h2>{{ contact.name }}</h2></b-col>
-            </b-row>                            
-          </template>
-          <b-row>
-            <b-col class="text-right">Email</b-col>
-            <b-col>{{contact.email}}</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-right">Endereço</b-col>
-            <b-col>{{contact.address}}</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-right">Bairro</b-col>
-            <b-col>{{contact.district}}</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-right">Cidade</b-col>
-            <b-col>{{contact.city}}</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-right">Estado</b-col>
-            <b-col>{{contact.state}}</b-col>
-          </b-row>
-        </b-modal>
-        <!-- Fim modal perfil de usuário -->
+        <!-- Modal para exibir dados do contato -->
+        <ModalShowContact :contact="contact" />
       </b-row>
       <!-- Fim relação de contatos -->
     </section>
@@ -72,13 +45,15 @@
 
 <script>
 import AddContact from "./AddContact";
-import Avatar from "./Avatar"
+import Avatar from "./Avatar";
+import ModalShowContact from "../modal/ModalShowContact";
 
 export default {
   name: "ContactList",
   components: {
     AddContact,
-    Avatar
+    Avatar,
+    ModalShowContact,
   },
   computed: {
     contacts() {
