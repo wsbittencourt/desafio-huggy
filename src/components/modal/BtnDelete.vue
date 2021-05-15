@@ -1,26 +1,19 @@
 <template>
-  <a @click="deleteContact" >
-    <b-icon icon="trash-fill" id="btn-trash"></b-icon>
-  </a>
+  <b-icon icon="trash-fill" @click="deleteContact"></b-icon>
 </template>
 
 <script>
 
 export default {
   name: "BtnDelete",
-  props: ['contact-id','contact-name'],
+  props: ['contact-id'],
   methods: {
     deleteContact() {
-      console.log('Delete from'+"{{contact-id}}");
+      console.log('Deletado!');
     }
   }
 }
 </script>
 
 <style scoped>
-#btn-trash{
-  color: #505050;
-  float: right;
-  display: none;
-}
 </style>
