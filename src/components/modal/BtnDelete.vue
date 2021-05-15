@@ -6,10 +6,11 @@
 
 export default {
   name: "BtnDelete",
-  props: ['contact-id'],
+  props: ['id'],
   methods: {
     deleteContact() {
-      console.log('Deletado!');
+      this.$store.dispatch("deleteContact",{'id': this.id});
+      this.$root.$emit('close',this.id);
     }
   }
 }

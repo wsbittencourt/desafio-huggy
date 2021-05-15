@@ -12,7 +12,7 @@
             </h2>
           </b-col>
           <b-col :style="btnGroup">
-            <BtnDelete :contact-id="contact.id" />
+            <BtnDelete :id="contact.id" />
             <span :style="btnSpace">
               <BtnEdit :contact-id="contact.id" />
             </span>
@@ -99,10 +99,6 @@ export default {
       } else {
         this.modalSize = { "width": "400px" }
       }
-    },
-    hideModal(id) {
-      console.log('Janela Fechada!');
-      this.$root.$emit('bv::hide::modal',id)
     }
   },
   created() {

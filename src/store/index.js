@@ -31,6 +31,25 @@ const actions = {
       .catch((error) => {
         console.log("error " + error);
       });
+  },
+  deleteContact({dispatch },obj) {
+    const key = this.state.apiHeaders.Authorization
+    axios(this.state.api + obj.id, {
+      method: 'DELETE',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": key
+      },
+      credentials: 'same-origin',
+    }).catch((error) => {
+        console.log("Error " + error);
+    })
+      .finally(() =>{
+        dispatch("getContacts");
+      });
   }
 }
 
