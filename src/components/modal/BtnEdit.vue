@@ -1,15 +1,19 @@
 <template>
-  <b-icon icon="pencil-fill" @click="editContact"></b-icon>
+  <span>
+    <b-icon icon="pencil-fill" @click="editContact"></b-icon>
+  </span>
 </template>
 
 <script>
 
 export default {
   name: "BtnEdit",
-  props: ['contact-id'],
+  props: ['contact'],
   methods: {
     editContact() {
-      console.log('Editado!');
+      this.$store.commit('SET_CONTACT', this.contact);
+      this.$root.$emit('bv::show::modal','modalEdit');
+      this.$root.$emit('bv::hide::modal',this.id);
     }
   }
 }

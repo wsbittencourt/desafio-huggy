@@ -5,7 +5,7 @@
       <b-col><strong> Email </strong></b-col>
       <b-col><strong> Telefone </strong></b-col>
     </b-row>
-
+    
     <!-- Relação de contatos -->
     <section>
       <b-row v-for="contact in contacts" :key="contact.id" class="contacts-row" v-b-modal="contact.id">
@@ -40,6 +40,7 @@
     </section>
     <!-- Fim de mensagem -->
 
+    <ModalEditContact modalID="modalEdit"/>
   </div>
 </template>
 
@@ -47,6 +48,7 @@
 import AddContact from "./AddContact";
 import Avatar from "./Avatar";
 import ModalShowContact from "../modal/ModalShowContact";
+import ModalEditContact from "../modal/ModalEditContact";
 
 export default {
   name: "ContactList",
@@ -54,6 +56,7 @@ export default {
     AddContact,
     Avatar,
     ModalShowContact,
+    ModalEditContact,
   },
   computed: {
     contacts() {
@@ -62,7 +65,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getContacts");
-  },
+  }
 };
 </script>
 

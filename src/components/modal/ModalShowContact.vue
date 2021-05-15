@@ -14,7 +14,7 @@
           <b-col :style="btnGroup">
             <BtnDelete :id="contact.id" />
             <span :style="btnSpace">
-              <BtnEdit :contact-id="contact.id" />
+              <BtnEdit :contact="contact" />
             </span>
             <BtnClose :id="contact.id" />
           </b-col>
