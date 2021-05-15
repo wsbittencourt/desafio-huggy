@@ -41,6 +41,7 @@
     <!-- Fim de mensagem -->
 
     <ModalEditContact modalID="modalEdit"/>
+    <ModalAddContact  modalID="modalAdd"/>
   </div>
 </template>
 
@@ -49,6 +50,7 @@ import AddContact from "./AddContact";
 import Avatar from "./Avatar";
 import ModalShowContact from "../modal/ModalShowContact";
 import ModalEditContact from "../modal/ModalEditContact";
+import ModalAddContact from "../modal/ModalAddContact";
 
 export default {
   name: "ContactList",
@@ -57,6 +59,7 @@ export default {
     Avatar,
     ModalShowContact,
     ModalEditContact,
+    ModalAddContact,
   },
   computed: {
     contacts() {

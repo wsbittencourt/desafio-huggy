@@ -1,5 +1,5 @@
 <template>
-  <b-button id="btn">
+  <b-button id="btn" @click="showModal">
     <b-icon icon="plus" aria-hidden="true"></b-icon> Adicionar contato
   </b-button>
 </template>
@@ -7,6 +7,23 @@
 <script>
 export default {
   name: "AddContact",
+  methods: {
+    showModal() {
+      const emptyContact = {  
+        "name": "",  
+        "email": "",
+        "mobile": "", 
+        "phone": "",
+        "address": "",
+        "city": "",
+        "district": "",
+        "state": "",
+        "obs": "Apenas mais um contato.",
+      };
+      this.$store.commit('SET_CONTACT', emptyContact);
+      this.$root.$emit('bv::show::modal','modalAdd');
+    }
+  }
 };
 </script>
 

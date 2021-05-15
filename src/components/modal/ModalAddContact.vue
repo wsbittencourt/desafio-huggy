@@ -7,7 +7,7 @@
       <b-container>
         <b-row>
           <b-col>
-            <h2> Editar contato </h2>
+            <h2> Adicionar novo contato </h2>
           </b-col>
         </b-row>
       </b-container>
@@ -16,7 +16,7 @@
     <!-- Fim do título -->
 
     <!-- Corpo da tela modal -->
-    <b-form @submit.stop.prevent="edit">
+    <b-form @submit.stop.prevent="add">
       <b-form-group id="grup-name" label="Name" label-for="name">
         <b-form-input name="name" :value="contact.name" v-model="contact.name"></b-form-input>
       </b-form-group>
@@ -51,6 +51,7 @@
         </b-col>
       </b-row>
 
+      <!-- Footer -->
       <template>
         <span>
           <b-button class="ml-2">Cancelar</b-button>
@@ -66,7 +67,7 @@
 <script>
 
 export default {
-  name: "ModalEditContact",
+  name: "ModalAddContact",
   props: ['modalID'],
   computed: {
     contact: {
@@ -92,8 +93,8 @@ export default {
         this.modalSize = { "width": "400px" }
       }
     },
-    edit(){
-      console.log('Edição salva com sucesso')
+    add(){
+      console.log('Adicionando contato')
       const newContact = {  
         "name": this.contact.name,  
         "email": this.contact.email,
@@ -106,11 +107,12 @@ export default {
         "obs": this.contact.obs,
         "photo": this.contact.photo,
       };
-      this.$store.dispatch("editContact",{"obj": newContact, "contactId": this.contact.id});
+
+      this.$store.dispatch("addContact",newContact);
 
 
       //Escode a janela de exibição dos dados
-      this.$root.$emit('bv::hide::modal',this.modalID);
+      this.$root.$emit('bv::hide::modal','modalAdd');
     }
   },
   created() {

@@ -13,7 +13,7 @@ export default {
     editContact() {
       this.$store.commit('SET_CONTACT', this.contact);
       this.$root.$emit('bv::show::modal','modalEdit');
-      this.$root.$emit('bv::hide::modal',this.id);
+      this.$root.$emit('bv::close::modal',this.id);
     }
   }
 }
