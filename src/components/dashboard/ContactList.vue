@@ -1,22 +1,22 @@
 <template>
-  <div>
-    <b-row id="contacts-head" align-h="between">
-      <b-col id="name"><strong> Nome <b-icon icon="arrow-down"></b-icon></strong></b-col>
-      <b-col><strong> Email </strong></b-col>
-      <b-col><strong> Telefone </strong></b-col>
+  <b-container>
+    <b-row id="contacts-head">
+      <b-col md="5" id="name"><strong> Nome <b-icon icon="arrow-down"></b-icon></strong></b-col>
+      <b-col md="4" ><strong> Email </strong></b-col>
+      <b-col md="3" ><strong> Telefone </strong></b-col>
     </b-row>
     
     <!-- Relação de contatos -->
     <!-- contact in contacts -->
-    <section>
+    <section id="cardBody">
       <b-row v-for="contact in filteredContacts" :key="contact.id" class="contacts-row" v-b-modal="contact.id">
-        <b-col id="name"> 
-            <Avatar :url="contact.photo"/> {{ contact.name }}
+        <b-col md="5" sm="6" align-self="stretch">
+          <span id="avatarIcon"><Avatar :url="contact.photo"/></span>{{ contact.name }}
         </b-col>
 
-        <b-col> {{ contact.email }} </b-col>
+        <b-col md="4" sm="3"> {{ contact.email }} </b-col>
 
-        <b-col align-h="between" class="menu">
+        <b-col md="3" sm="2" class="menu">
           <span>{{ contact.phone }}</span>
 
           <span class="edit-delete">
@@ -53,7 +53,7 @@
     <ModalEditContact modalID="modalEdit"/>
     <ModalAddContact  modalID="modalAdd"/>
     <ModalDeleteContact />
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -100,16 +100,10 @@ export default {
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 13px;
   margin-bottom: 3px;
-  left: 0%;
-  right: 0%;
-  top: 100%;
-
-  font-weight: 500;
   font-size: 12px;
   line-height: 16px;
 
   text-align: left;
-  letter-spacing: 0.4px;
 
   color: #505050;
 }
@@ -157,12 +151,23 @@ export default {
   margin-top: 100px;
 }
 
+#cardBody{
+  position:relative;
+  overflow-y:scroll;
+}
+
 @media (min-width: 768px) {
   #contacts-head #name {
     padding-left: 24px;
   }
   #hide {
     padding-top: 100px;
+  }
+  #avatarIcon { 
+    margin-right: 10px;
+  }
+  #cardBody{
+    height: 70vh;
   }
 }
 
@@ -173,7 +178,14 @@ export default {
   #searchIcon{
   width: 50px; 
   height: 50px;
-  margin-top: 30px;
-}
+  margin-top: 30px;  
+  }
+  .contacts-row {
+    height: 150px;
+  }
+  #cardBody{
+    margin-top: 50px;
+    height: 40vh;
+  }
 }
 </style>

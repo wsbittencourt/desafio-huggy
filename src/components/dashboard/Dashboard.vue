@@ -1,13 +1,15 @@
 <template>
-  <b-container class="vh-100">
+  <b-container fluid >
     <b-col md="10" sm="8" offset-md="1">
       <h2>Contatos</h2>
       <b-card id="box">
-        <div id="header">
-          <div><SearchInput /></div>
-          <div id="addContact"><AddContact /></div>
-        </div>
-        <ContactList />
+        <b-card-body>
+          <div id="header">
+            <div><SearchInput /></div>
+            <div id="addContact"><AddContact /></div>
+          </div>
+          <ContactList />
+        </b-card-body>
       </b-card>
     </b-col>
   </b-container>
@@ -72,13 +74,13 @@ h2 {
 
 @media (min-width: 768px) {
   #box {
-    height: 600px;
+    height: 100vh;
   }
 }
 
 @media (max-width: 767px) {
   #box {
-    height: 80vh;
+    height: 90vh;
   }
   #header {
     display: flex;
