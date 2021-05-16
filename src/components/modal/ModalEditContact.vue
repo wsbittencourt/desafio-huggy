@@ -23,7 +23,11 @@
           <b-form-group id="grup-name">
             <label for="name">Nome</label>
             <b-form-input class="formInput" name="name" :value="contact.name" 
-              placeholder="Nome" v-model="contact.name"></b-form-input>
+              placeholder="Nome" v-model="contact.name" 
+              v-validate="{ required: true }" :state="validateState('name')"></b-form-input>
+              <b-form-invalid-feedback id="name-live-feedback">
+                <span class="textError">Campo obrigatório</span>  
+              </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -33,7 +37,11 @@
           <b-form-group id="grup-email">
             <label for="email">Email</label>
             <b-form-input class="formInput" name="email" :value="contact.email" 
-              placeholder="Email" v-model="contact.email"></b-form-input>
+              placeholder="Email" v-model="contact.email"
+              v-validate="{ email: true }" :state="validateState('email')"></b-form-input>
+              <b-form-invalid-feedback id="email-live-feedback">
+                <span class="textError">Campo obrigatório</span>  
+              </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -126,25 +134,38 @@ export default {
         this.modalSize = { "width": "400px" }
       }
     },
+    validateState(ref) {
+      if (
+        this.veeFields[ref] &&
+        (this.veeFields[ref].dirty || this.veeFields[ref].validated)
+      ) {
+        return !this.veeErrors.has(ref);
+      }
+      return null;
+    },
     edit(){
-      console.log('Edição salva com sucesso')
-      const newContact = {  
-        "name": this.contact.name,  
-        "email": this.contact.email,
-        "mobile": this.contact.mobile, 
-        "phone": this.contact.phone,
-        "address": this.contact.address,
-        "city": this.contact.city,
-        "district": this.contact.district,
-        "state": this.contact.state,
-        "obs": this.contact.obs,
-        "photo": this.contact.photo,
-      };
-      this.$store.dispatch("editContact",{"obj": newContact, "contactId": this.contact.id});
+      this.$validator.validateAll().then(result => {
+        if (!result) {
+          return;
+        }
+        console.log('Edição salva com sucesso')
+        const newContact = {  
+          "name": this.contact.name,  
+          "email": this.contact.email,
+          "mobile": this.contact.mobile, 
+          "phone": this.contact.phone,
+          "address": this.contact.address,
+          "city": this.contact.city,
+          "district": this.contact.district,
+          "state": this.contact.state,
+          "obs": this.contact.obs,
+          "photo": this.contact.photo,
+        };
+        this.$store.dispatch("editContact",{"obj": newContact, "contactId": this.contact.id});
 
-
-      //Escode a janela de exibição dos dados
-      this.$root.$emit('bv::hide::modal',this.modalID);
+        //Escode a janela de exibição dos dados
+        this.$root.$emit('bv::hide::modal',this.modalID);
+      });      
     },
     hideModal() {
         this.$root.$emit('bv::hide::modal',this.modalID);
@@ -202,6 +223,12 @@ h2{
   /* Remove o sombreamento */
   box-shadow: none;
 }
+.textError{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #AD2213;
+}
 
 #btnFoot{
   text-align: right;
@@ -227,6 +254,4 @@ label{
   font-size: 14px;
   color: #262626;
 }
-
-
 </style>

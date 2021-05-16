@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 import Dashboard from './components/dashboard/Dashboard.vue'
 import Login from './components/Login.vue'
 import store from './store'
-import Vuelidate from 'vuelidate'
+import VeeValidate from 'vee-validate'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -15,7 +15,11 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
-Vue.use(Vuelidate)
+Vue.use(VeeValidate, {
+  inject: true,
+  fieldsBagName: 'veeFields',
+  errorBagName: 'veeErrors'
+})
 
 const router = new VueRouter({
   routes: [
