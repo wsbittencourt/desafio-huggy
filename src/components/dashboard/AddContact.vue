@@ -1,8 +1,6 @@
 <template>
   <b-button id="btn" @click="showModal">
-    <strong>
       <b-icon icon="plus" aria-hidden="true"></b-icon> Adicionar contato
-    </strong>
   </b-button>
 </template>
 
@@ -37,6 +35,7 @@ export default {
   background-color: #321bde;
   font-size: 14px;
   border-radius: 8px;
+  font-weight: bold;
 }
 #btn:focus, #btn:active{
   /* Remove o sombreamento */

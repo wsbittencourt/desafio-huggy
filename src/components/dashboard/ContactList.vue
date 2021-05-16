@@ -7,8 +7,9 @@
     </b-row>
     
     <!-- Relação de contatos -->
+    <!-- contact in contacts -->
     <section>
-      <b-row v-for="contact in contacts" :key="contact.id" class="contacts-row" v-b-modal="contact.id">
+      <b-row v-for="contact in filteredContacts" :key="contact.id" class="contacts-row" v-b-modal="contact.id">
         <b-col id="name"> 
             <Avatar :url="contact.photo"/> {{ contact.name }}
         </b-col>
@@ -32,9 +33,18 @@
 
     <!-- Exibe mensagem caso não existam contatos cadastrados -->
     <section v-if="contacts.length == 0">
-      <div id="hide">
+      <div class="hide">
         <div><img src="../../assets/book.png" /></div>
         <p>Ainda não há contatos</p>
+        <AddContact />
+      </div>
+    </section>
+
+    <!-- Exibe mensagem caso não exista resultado na pesquisa -->
+    <section v-if="filteredContacts.length == 0 && contacts.length != 0">
+      <div class="hide">
+        <p><b-icon icon="search" id="searchIcon"></b-icon></p>
+        <p style="color: #757575">Nenhum resultado encontrado.<br/>Deseja adicionar um novo contato?</p>
         <AddContact />
       </div>
     </section>
@@ -63,8 +73,18 @@ export default {
   },
   computed: {
     contacts() {
-      return this.$store.state.contacts; 
+       return this.$store.state.contacts; 
     },
+
+    filteredContacts () {
+      try {
+        let contatosFiltrados = (this.$store.getters.getFilteredContacts || this.$store.getters.allContacts)
+        return contatosFiltrados
+      } catch (error) {
+        console.log(error)
+      }
+      return {}
+    }
   },
   mounted() {
     this.$store.dispatch("getContacts");
@@ -121,11 +141,17 @@ export default {
   margin-left:23px
 }
 
-#hide {
+.hide {
   align-items: center;
   text-align: center;
-  letter-spacing: 0.15px;
   border: none;
+}
+
+#searchIcon{
+  width: 120px; 
+  height: 120px;
+  color: #757575;
+  margin-top: 100px;
 }
 
 @media (min-width: 768px) {
@@ -141,5 +167,10 @@ export default {
   #hide {
     padding-top: 15px;
   }
+  #searchIcon{
+  width: 50px; 
+  height: 50px;
+  margin-top: 30px;
+}
 }
 </style>

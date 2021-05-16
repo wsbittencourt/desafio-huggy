@@ -4,11 +4,24 @@
     type="search"
     placeholder="Buscar contato"
     icon="search"
+    v-model="searchWord"  
   ></b-form-input>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'SearchInput',
+  computed: {
+    searchWord: {
+      get () {
+        return this.$store.state.searchWord
+      },
+      set (value) {
+        this.$store.dispatch('FILTERED_CONTACTS', value)
+      }
+    }
+  },
+};
 </script>
 
 <style scoped>

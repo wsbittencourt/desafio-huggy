@@ -4,18 +4,43 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const removerAcentos = (string) => {
+  const mapaAcentosHex = {
+    a: /[\xE0-\xE6]/g,
+    e: /[\xE8-\xEB]/g,
+    i: /[\xEC-\xEF]/g,
+    o: /[\xF2-\xF6]/g,
+    u: /[\xF9-\xFC]/g,
+    c: /\xE7/g
+  }
+
+  for (let letra in mapaAcentosHex) {
+    var expressaoRegular = mapaAcentosHex[letra]
+    string = string.replace(expressaoRegular, letra)
+  }
+
+  return string
+}
+
 const state = {
   contacts: [],
   tmpContact: {},
   api: "https://api.huggy.app/v3/contacts/",
-  apiHeaders: require('./config.json')
+  apiHeaders: require('./config.json'),
+  searchWord: null,
+  filteredContacts: null,
 }
 
 const getters = {
   //Retorna o contato o qual está sendo manipulado
   getContact: state => {
     return state.tmpContact
-  }
+  },
+  allContacts: (state) => state.contacts,
+
+  getSearchWord: (state) => state.searchWord,
+
+  getFilteredContacts: (state) => state.filteredContacts
 }
 
 const actions = {
@@ -110,6 +135,12 @@ const actions = {
         dispatch("getContacts");
       });
   },
+  SET_CONTACT ({ commit }, contact) {
+    commit('SET_CONTACT', contact)
+  },
+  FILTERED_CONTACTS ({ commit }, word) {
+    commit('FILTERED_CONTACTS', word)
+  }
 }
 
 const mutations = {
@@ -121,6 +152,19 @@ const mutations = {
   //Atualiza o contato a ser manipulado
   SET_CONTACT(state,newContact){
     state.tmpContact = newContact
+  },
+
+  FILTERED_CONTACTS (state, word) {
+    if (!(word) || word === '{}') {
+        state.searchWord = null
+        state.filteredContacts = null
+    } else {
+      state.searchWord = word
+      word = removerAcentos(word.trim().toLowerCase())
+      state.filteredContacts = state.contacts.filter((contact) => {
+        return contact.name.toLowerCase().includes(word) || contact.email.toLowerCase().includes(word) || contact.phone.toLowerCase().includes(word)
+      })
+    }
   }
 }
 

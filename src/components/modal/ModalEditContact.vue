@@ -40,7 +40,7 @@
               placeholder="Email" v-model="contact.email"
               v-validate="{ email: true }" :state="validateState('email')"></b-form-input>
               <b-form-invalid-feedback id="email-live-feedback">
-                <span class="textError">Campo obrigatório</span>  
+                <span class="textError">Email inválido</span>  
               </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
