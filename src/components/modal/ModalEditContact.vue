@@ -51,7 +51,11 @@
           <b-form-group id="grup-telefone">
             <label for="telefone">Telefone</label>
             <b-form-input class="formInput" name="telefone" :value="contact.phone" 
-              placeholder="Telefone" v-model="contact.phone"></b-form-input>
+              placeholder="Telefone" v-model="contact.phone"
+              v-validate="{ phone : true }" :state="validateState('telefone')"></b-form-input>
+              <b-form-invalid-feedback id="telefone-live-feedback">
+                <span class="textError">{{ veeErrors.first('telefone') }}</span>
+              </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -61,7 +65,11 @@
           <b-form-group id="grup-celular">
             <label for="celular">Celular</label>
             <b-form-input class="formInput" name="celular" :value="contact.district" 
-              placeholder="Celular" v-model="contact.mobile"></b-form-input>
+              placeholder="Celular" v-model="contact.mobile"
+              v-validate="{ mobile : true }" :state="validateState('celular')"></b-form-input>
+              <b-form-invalid-feedback id="celular-live-feedback">
+                <span class="textError">{{ veeErrors.first('celular') }}</span>
+              </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -107,6 +115,8 @@
 
 <script>
 
+import rules from '../../rules/rules'
+
 export default {
   name: "ModalEditContact",
   props: ['modalID'],
@@ -123,8 +133,9 @@ export default {
   data() {
     const hideFooter = true;
     const modalSize = {};
-   
-    return { hideFooter,modalSize};
+    const phone = rules.phone;
+    const mobile = rules.mobile;
+    return { hideFooter,modalSize, phone, mobile };
   },
   methods: {
     onResize() {
@@ -148,7 +159,6 @@ export default {
         if (!result) {
           return;
         }
-        console.log('Edição salva com sucesso')
         const newContact = {  
           "name": this.contact.name,  
           "email": this.contact.email,

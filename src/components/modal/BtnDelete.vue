@@ -9,8 +9,9 @@ export default {
   props: ['id'],
   methods: {
     deleteContact() {
-      this.$store.dispatch("deleteContact",{'id': this.id});
-      this.$root.$emit('close',this.id);
+      this.$store.dispatch('SET_ID_TO_DELETE', this.id);
+      this.$root.$emit('bv::hide::modal',this.id);
+      this.$root.$emit('bv::show::modal','modalDelete');           
     }
   }
 }

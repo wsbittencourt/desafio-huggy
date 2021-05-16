@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+//Remove os acentos da palavra passada
 const removerAcentos = (string) => {
   const mapaAcentosHex = {
     a: /[\xE0-\xE6]/g,
@@ -29,6 +30,7 @@ const state = {
   apiHeaders: require('./config.json'),
   searchWord: null,
   filteredContacts: null,
+  idToDelete: null,
 }
 
 const getters = {
@@ -40,7 +42,9 @@ const getters = {
 
   getSearchWord: (state) => state.searchWord,
 
-  getFilteredContacts: (state) => state.filteredContacts
+  getFilteredContacts: (state) => state.filteredContacts,
+
+  getIdToDelete: (state) => state.idToDelete
 }
 
 const actions = {
@@ -85,6 +89,7 @@ const actions = {
         dispatch("getContacts");
       });
   },
+  //Registra a edição no servidor
   editContact({ commit, dispatch },{obj,contactId}){
     const key = this.state.apiHeaders.Authorization
     axios(this.state.api + contactId, {
@@ -108,6 +113,7 @@ const actions = {
         dispatch("getContacts");
       });
   },
+  //Envia a solicitação de adição do contato, ao servidor.
   addContact( {dispatch }, obj ){
     const key = this.state.apiHeaders.Authorization
 
@@ -135,11 +141,21 @@ const actions = {
         dispatch("getContacts");
       });
   },
+
+  //Chamada da mutation para atualizar a state contacts
   SET_CONTACT ({ commit }, contact) {
     commit('SET_CONTACT', contact)
   },
+
+  //Chamada da mutation para filtrar os contatos resgatado do servidor.
+  //Em seguida esse filtro será registrad na state filteredContacs
   FILTERED_CONTACTS ({ commit }, word) {
     commit('FILTERED_CONTACTS', word)
+  },
+
+  //Chama mutation para atualizar o id a ser deletado
+  SET_ID_TO_DELETE ({commit}, id) {
+    commit ('SET_ID_TO_DELETE',id)
   }
 }
 
@@ -154,6 +170,12 @@ const mutations = {
     state.tmpContact = newContact
   },
 
+  //Atualiza a state responsável por armazenar o id a ser deletado
+  SET_ID_TO_DELETE(state,id) {
+    state.idToDelete = id
+  },
+
+  //Filtra a coleção de contatos de acordo com a palavra passada
   FILTERED_CONTACTS (state, word) {
     if (!(word) || word === '{}') {
         state.searchWord = null
@@ -162,7 +184,10 @@ const mutations = {
       state.searchWord = word
       word = removerAcentos(word.trim().toLowerCase())
       state.filteredContacts = state.contacts.filter((contact) => {
-        return contact.name.toLowerCase().includes(word) || contact.email.toLowerCase().includes(word) || contact.phone.toLowerCase().includes(word)
+        if(!contact.phone){
+          contact.phone = ""
+        }
+        return contact.name.toLowerCase().includes(word) || contact.email.toLowerCase().includes(word) || contact.phone.includes(word);
       })
     }
   }

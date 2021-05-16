@@ -51,9 +51,10 @@
             <label for="telefone">Telefone</label>
             <b-form-input class="formInput" name="telefone" :value="contact.phone" 
               placeholder="Telefone" v-model="contact.phone"
-              v-validate="{ required: true }" :state="validateState('telefone')"></b-form-input>
+              v-validate="{ required: true, phone: true }" :state="validateState('telefone')"></b-form-input>
               <b-form-invalid-feedback id="telefone-live-feedback">
-                <span class="textError">Campo obrigatório</span>  
+                <span class="textError">Campo obrigatório</span> 
+                <div v-if="contact.phone != '' " class="textError">{{ veeErrors.first('telefone') }} </div> 
               </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -65,9 +66,10 @@
             <label for="celular">Celular</label>
             <b-form-input class="formInput" name="celular" :value="contact.district" 
               placeholder="Celular" v-model="contact.mobile"
-              v-validate="{ required: true }" :state="validateState('celular')"></b-form-input>
+              v-validate="{ required: true, mobile: true }" :state="validateState('celular')"></b-form-input>
               <b-form-invalid-feedback id="celular-live-feedback">
                 <span class="textError">Campo obrigatório</span>  
+                <div v-if="contact.mobile != '' " class="textError">{{ veeErrors.first('celular') }} </div> 
               </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
@@ -113,6 +115,7 @@
 </template>
 
 <script>
+import rules from '../../rules/rules'
 
 export default {
   name: "ModalAddContact",
@@ -130,8 +133,9 @@ export default {
   data() {
     const hideFooter = true;
     const modalSize = {};
-   
-    return { hideFooter,modalSize };
+    const phone = rules.phone;
+    const mobile = rules.mobile;
+    return { hideFooter,modalSize, phone, mobile };
   },
   methods: {
     onResize() {
@@ -155,7 +159,6 @@ export default {
         if (!result) {
           return;
         }
-        console.log('Adicionando contato')
       const newContact = {  
         "name": this.contact.name,  
         "email": this.contact.email,
@@ -181,7 +184,7 @@ export default {
     }
   },
   created() {
-    window.addEventListener('resize', this.onResize)
+    window.addEventListener('resize', this.onResize)    
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
