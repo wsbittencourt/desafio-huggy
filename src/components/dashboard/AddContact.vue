@@ -1,6 +1,8 @@
 <template>
   <b-button id="btn" @click="showModal">
-    <b-icon icon="plus" aria-hidden="true"></b-icon> Adicionar contato
+    <strong>
+      <b-icon icon="plus" aria-hidden="true"></b-icon> Adicionar contato
+    </strong>
   </b-button>
 </template>
 

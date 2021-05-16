@@ -7,7 +7,7 @@
       <b-container>
         <b-row>
           <b-col>
-            <h2> Editar contato </h2>
+            <h2>Editar contato</h2>
           </b-col>
         </b-row>
       </b-container>
@@ -17,46 +17,80 @@
 
     <!-- Corpo da tela modal -->
     <b-form @submit.stop.prevent="edit">
-      <b-form-group id="grup-name" label="Name" label-for="name">
-        <b-form-input name="name" :value="contact.name" v-model="contact.name"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="grup-email" label="Email" label-for="email">
-        <b-form-input name="email" :value="contact.email" v-model="contact.email"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="grup-telefone" label="Telefone" label-for="telefone">
-        <b-form-input name="telefone" :value="contact.phone" v-model="contact.phone"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="grup-celular" label="Celular" label-for="celular">
-        <b-form-input name="celular" :value="contact.district" v-model="contact.mobile"></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="grup-endereco" label="Endereço" label-for="endereco">
-        <b-form-input name="endereco" :value="contact.address" v-model="contact.address"></b-form-input>
-      </b-form-group>
 
       <b-row>
-        <b-col>
-          <b-form-group id="grup-district" label="Bairro" label-for="district">
-            <b-form-input name="district" :value="contact.district" v-model="contact.district"></b-form-input>
-          </b-form-group>
-        </b-col>
-
-        <b-col>
-          <b-form-group id="grup-estado" label="Estado" label-for="estado">
-            <b-form-input name="estado" :value="contact.state" v-model="contact.state"></b-form-input>
+        <b-col cols="9">
+          <b-form-group id="grup-name">
+            <label for="name">Nome</label>
+            <b-form-input class="formInput" name="name" :value="contact.name" 
+              placeholder="Nome" v-model="contact.name"></b-form-input>
           </b-form-group>
         </b-col>
       </b-row>
 
-      <template>
-        <span>
-          <b-button class="ml-2">Cancelar</b-button>
-          <b-button type="submit" variant="primary">Salvar</b-button> 
-        </span> 
-      </template>  
+      <b-row>
+        <b-col cols="9">
+          <b-form-group id="grup-email">
+            <label for="email">Email</label>
+            <b-form-input class="formInput" name="email" :value="contact.email" 
+              placeholder="Email" v-model="contact.email"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col cols="5">
+          <b-form-group id="grup-telefone">
+            <label for="telefone">Telefone</label>
+            <b-form-input class="formInput" name="telefone" :value="contact.phone" 
+              placeholder="Telefone" v-model="contact.phone"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col cols="5">
+          <b-form-group id="grup-celular">
+            <label for="celular">Celular</label>
+            <b-form-input class="formInput" name="celular" :value="contact.district" 
+              placeholder="Celular" v-model="contact.mobile"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col cols="9">
+          <b-form-group id="grup-endereco">
+            <label for="endereco">Endereço</label>
+            <b-form-input class="formInput" name="endereco" :value="contact.address" 
+              placeholder="Endereço" v-model="contact.address"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <b-row align-h="start">
+        <b-col cols="5">
+          <b-form-group id="grup-district">
+            <label for="district">Bairro</label>
+            <b-form-input class="formInput" name="district" :value="contact.district" 
+              placeholder="Bairro" v-model="contact.district"></b-form-input>
+          </b-form-group>
+        </b-col>
+
+        <b-col cols="4">
+          <b-form-group id="grup-estado">
+            <label for="estado">Estado</label>
+            <b-form-input class="formInput" name="estado" :value="contact.state" 
+              placeholder="Estado" v-model="contact.state"></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <hr>
+      <div id="btnFoot">
+        <b-button id="btnCancelar" @click.stop.prevent="hideModal"><strong>Cancelar</strong></b-button>
+        <b-button class="formInput" type="submit" id="btnSalvar"><strong>Salvar</strong></b-button> 
+      </div> 
     </b-form>
     
   </b-modal> 
@@ -82,7 +116,7 @@ export default {
     const hideFooter = true;
     const modalSize = {};
    
-    return { hideFooter,modalSize };
+    return { hideFooter,modalSize};
   },
   methods: {
     onResize() {
@@ -111,6 +145,9 @@ export default {
 
       //Escode a janela de exibição dos dados
       this.$root.$emit('bv::hide::modal',this.modalID);
+    },
+    hideModal() {
+        this.$root.$emit('bv::hide::modal',this.modalID);
     }
   },
   created() {
@@ -118,7 +155,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
-  },
+  }
 };
 </script>
 
@@ -135,5 +172,61 @@ h2{
   align-items: right;
   letter-spacing: 0.15px;
   color: #262626;
+  font-weight: bold;
 }
+
+#btnSalvar {
+  background-color: #321BDE;
+  border-radius: 8px;
+  width: 70px;
+  height: 36px;
+
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-left: 20px;
+}
+
+#btnCancelar {
+  background:none;
+  border:none;
+  margin:0;
+  padding:0;
+  cursor: pointer;
+
+  color: #505050;
+  font-size: 14px;
+}
+
+#btnSalvar:focus, #btnSalvar:active, #btnCancelar:focus,
+ #btnCancelar:active, .formInput:focus, .formInput:active{
+  /* Remove o sombreamento */
+  box-shadow: none;
+}
+
+#btnFoot{
+  text-align: right;
+  margin: 10px 10px 10px;
+}
+
+label{
+  color: #262626;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.formInput{
+  background: #F8F8F8;
+  height: 36px;
+  border: 1px solid #E1E1E1;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-bottom: 5px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #262626;
+}
+
+
 </style>
